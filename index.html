@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sexy Talk</title>
+<meta name="description" content="App details page">
+
+<!-- Roboto — the Android system typeface -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ======================= TOP APP BAR ======================= -->
+<header class="app-header" id="appHeader">
+  <button class="icon-btn" type="button" aria-label="Go back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+  </button>
+  <span class="header-spacer"></span>
+  <button class="icon-btn" type="button" aria-label="Search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="icon-btn" type="button" aria-label="More options">
+    <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="19" r="1.7"/></svg>
+  </button>
+</header>
+
+<main>
+
+  <!-- ======================= APP IDENTITY ======================= -->
+  <section class="app-row">
+    <img class="app-icon" id="appIcon" src="" alt="">
+    <div class="app-meta">
+      <h1 class="app-name" id="appName"></h1>
+      <a class="app-dev" id="appDev" href="#"></a>
+      <span class="app-category" id="appCategory"></span>
+    </div>
+  </section>
+
+  <!-- ======================= STATS ROW ======================= -->
+  <section class="stats-row" aria-label="App statistics">
+    <div class="stat">
+      <span class="stat-value">
+        <span id="statRating"></span>
+        <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </span>
+      <span class="stat-label" id="statReviews"></span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">
+        <span id="statDownloads"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      </span>
+      <span class="stat-label">Downloads</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="statAge"></span>
+      <span class="stat-label">Rated for</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="statSize"></span>
+      <span class="stat-label">Size</span>
+    </div>
+  </section>
+
+  <!-- ======================= INSTALL BUTTON ======================= -->
+  <div class="install-wrap">
+    <a class="install-btn" id="installBtn" href="#" role="button"></a>
+  </div>
+
+  <!-- ======================= SCREENSHOT GALLERY ======================= -->
+  <section class="section section--tight" aria-label="Screenshots">
+    <div class="shots-scroller" id="shotsScroller"></div>
+  </section>
+
+  <!-- ======================= ABOUT ======================= -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">About this app</h2>
+      <button class="section-link" type="button" aria-label="View more details" id="aboutArrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+    <p class="about-text" id="aboutText"></p>
+    <button class="text-btn" id="aboutToggle" type="button">Read more</button>
+  </section>
+
+  <!-- ======================= DATA SAFETY ======================= -->
+  <section class="section" aria-label="Data safety">
+    <div class="section-head">
+      <h2 class="section-title">Data safety</h2>
+      <button class="section-link" type="button" aria-label="View data safety details">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+    <p class="section-sub">Safety starts with understanding how developers collect and share your data.</p>
+    <div class="safety-card">
+      <ul class="safety-list" id="safetyList"></ul>
+    </div>
+  </section>
+
+  <!-- ======================= RATINGS & REVIEWS ======================= -->
+  <section class="section" aria-label="Ratings and reviews">
+    <div class="section-head">
+      <h2 class="section-title">Ratings and reviews</h2>
+      <button class="section-link" type="button" aria-label="View all reviews">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="ratings-grid">
+      <div class="rating-big">
+        <div class="num" id="ratingBigNum"></div>
+        <div class="stars" id="ratingStars" aria-hidden="true"></div>
+        <div class="rating-count" id="ratingBigCount"></div>
+      </div>
+      <div class="bars" id="ratingBars"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="credit">Original design — not affiliated with Google Play.</footer>
+
+<!-- Config first (data), then script (behavior) -->
+<script src="app-config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
