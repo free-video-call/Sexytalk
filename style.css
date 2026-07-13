@@ -1,0 +1,481 @@
+/* ============================================================
+   style.css
+   -------------------------------------------------------------
+   Visual styling only. No app data lives here — see app-config.js.
+
+   Tuned to match the spacing, type scale, and proportions of the
+   Google Play Store app-details screen (icon size, stat-row
+   rhythm, pill install button, screenshot carousel, data-safety
+   card, ratings layout) while remaining an original stylesheet.
+   ============================================================ */
+
+/* ---------- Design tokens ---------- */
+:root{
+  --bg:#ffffff;
+  --ink:#202124;
+  --ink-soft:#5f6368;
+  --ink-faint:#80868b;
+  --accent:#01875f;        /* developer name link */
+  --install:#0b57d0;       /* install button blue */
+  --install-hover:#0a4bb8;
+  --line:#e8eaed;
+  --line-soft:#eef0f1;
+  --chip-bg:#f1f3f4;
+  --star:#01875f;
+  --star-track:#e2e5e7;
+  --safe-green:#01875f;
+  --unsafe-amber:#b06000;
+
+  --radius-xl:28px;
+  --radius-lg:20px;
+  --radius-md:16px;
+  --radius-sm:8px;
+  --space:16px;
+  --header-h:56px;
+
+  --font: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+html,body{ margin:0; padding:0; }
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  padding-bottom:calc(24px + var(--safe-bottom));
+  animation:fade-in .35s var(--ease);
+}
+
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; }
+ul{ margin:0; padding:0; list-style:none; }
+
+.visually-hidden{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+
+/* Keyboard focus visibility */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible{
+  outline:2px solid var(--install);
+  outline-offset:2px;
+  border-radius:8px;
+}
+
+/* ---------- Entrance animation ---------- */
+@keyframes fade-in{
+  from{ opacity:0; }
+  to{ opacity:1; }
+}
+@keyframes rise-in{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.app-row,
+.stats-row,
+.install-wrap,
+.section{
+  animation:rise-in .45s var(--ease) both;
+}
+.stats-row{ animation-delay:.04s; }
+.install-wrap{ animation-delay:.08s; }
+.section:nth-of-type(1){ animation-delay:.1s; }
+.section:nth-of-type(2){ animation-delay:.14s; }
+.section:nth-of-type(3){ animation-delay:.18s; }
+.section:nth-of-type(4){ animation-delay:.22s; }
+
+/* ---------- Header ---------- */
+.app-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  gap:0;
+  height:var(--header-h);
+  padding:var(--safe-top) 4px 0 4px;
+  background:rgba(255,255,255,.98);
+  backdrop-filter:saturate(180%) blur(8px);
+  -webkit-backdrop-filter:saturate(180%) blur(8px);
+  border-bottom:1px solid transparent;
+  transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.app-header.scrolled{
+  border-bottom-color:var(--line);
+  box-shadow:0 1px 2px rgba(0,0,0,.05);
+}
+.icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  border:none;
+  background:transparent;
+  border-radius:999px;
+  color:#3c4043;
+  cursor:pointer;
+  flex-shrink:0;
+  transition:background .15s var(--ease), transform .1s var(--ease);
+}
+.icon-btn:hover{ background:var(--chip-bg); }
+.icon-btn:active{ transform:scale(.92); }
+.icon-btn svg{ width:24px; height:24px; }
+.header-spacer{ flex:1; }
+
+/* ---------- Main container ---------- */
+main{
+  max-width:720px;
+  margin:0 auto;
+  padding:0 var(--space);
+}
+
+/* ---------- App identity row ---------- */
+.app-row{
+  display:flex;
+  gap:16px;
+  padding:16px 0 12px 0;
+  align-items:flex-start;
+}
+.app-icon{
+  width:72px;
+  height:72px;
+  border-radius:18px;
+  object-fit:cover;
+  flex-shrink:0;
+  background:var(--chip-bg);
+  box-shadow:0 1px 2px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.06);
+}
+.app-meta{
+  padding-top:1px;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.app-name{
+  font-size:20px;
+  line-height:1.3;
+  font-weight:600;
+  margin:0;
+  letter-spacing:0;
+  overflow-wrap:anywhere;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.app-dev{
+  display:block;
+  font-size:14px;
+  line-height:1.4;
+  font-weight:500;
+  color:#0b57d0;
+  margin:0;
+  width:fit-content;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.app-dev:hover{ text-decoration:underline; }
+.app-category{
+  display:inline-block;
+  font-size:12px;
+  font-weight:500;
+  color:var(--ink-soft);
+  background:var(--chip-bg);
+  padding:3px 10px;
+  border-radius:999px;
+  width:fit-content;
+  margin-top:2px;
+}
+
+/* ---------- Stats row ---------- */
+.stats-row{
+  display:flex;
+  align-items:stretch;
+  padding:14px 0 18px 0;
+}
+.stat{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:0 4px;
+  text-align:center;
+}
+.stat + .stat{ border-left:1px solid var(--line); }
+.stat-value{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--ink);
+  white-space:nowrap;
+  letter-spacing:0;
+}
+.stat-value svg{ width:13px; height:13px; flex-shrink:0; opacity:.85; }
+.stat-label{
+  font-size:11px;
+  font-weight:400;
+  color:var(--ink-soft);
+  letter-spacing:0;
+}
+
+/* ---------- Install button ---------- */
+.install-wrap{ padding:0 0 24px 0; }
+.install-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:40px;
+  padding:0 24px;
+  background:var(--install);
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.15px;
+  border:none;
+  border-radius:100px;
+  cursor:pointer;
+  box-shadow:none;
+  transition:background .15s var(--ease), transform .1s var(--ease), box-shadow .15s var(--ease);
+}
+.install-btn:hover{
+  background:var(--install-hover);
+  box-shadow:0 1px 3px rgba(11,87,208,.4);
+}
+.install-btn:active{ transform:scale(.98); }
+
+/* ---------- Section heading ---------- */
+.section{
+  padding:24px 0;
+  border-top:1px solid var(--line-soft);
+}
+.section--tight{ padding-top:2px; padding-bottom:22px; border-top:none; }
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 0 14px 0;
+}
+.section-title{
+  font-size:16px;
+  font-weight:600;
+  margin:0;
+  letter-spacing:0;
+}
+.section-sub{
+  font-size:12.5px;
+  color:var(--ink-soft);
+  margin:-8px 0 14px 0;
+  line-height:1.5;
+}
+.section-link{
+  display:inline-flex;
+  align-items:center;
+  padding:8px;
+  margin:-8px;
+  border-radius:8px;
+  color:#3c4043;
+  cursor:pointer;
+  background:transparent;
+  border:none;
+  transition:background .15s var(--ease);
+}
+.section-link:hover{ background:var(--chip-bg); }
+.section-link svg{ width:20px; height:20px; }
+
+/* ---------- Screenshot carousel ---------- */
+.shots-scroller{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+  padding:2px 0 4px 0;
+  margin:0 calc(var(--space) * -1);
+  padding-left:var(--space);
+  padding-right:var(--space);
+  scrollbar-width:none;
+}
+.shots-scroller::-webkit-scrollbar{ display:none; }
+.shot-card{
+  flex:0 0 auto;
+  width:132px;
+  aspect-ratio:9/16;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+  scroll-snap-align:start;
+  background:var(--chip-bg);
+  box-shadow:0 1px 2px rgba(0,0,0,.1);
+  transition:transform .18s var(--ease);
+}
+.shot-card:hover{ transform:translateY(-2px); }
+.shot-card img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* ---------- About ---------- */
+.about-text{
+  font-size:14px;
+  line-height:1.55;
+  color:var(--ink);
+  margin:0 0 4px 0;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  transition:-webkit-line-clamp .2s var(--ease);
+}
+.about-text.expanded{
+  -webkit-line-clamp:unset;
+  display:block;
+}
+.text-btn{
+  background:none;
+  border:none;
+  padding:6px 0;
+  color:#0b57d0;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+}
+.text-btn:hover{ text-decoration:underline; }
+
+/* ---------- Data safety ---------- */
+.safety-card{
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.safety-list{
+  display:flex;
+  flex-direction:column;
+}
+.safety-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:14px 16px;
+}
+.safety-item + .safety-item{
+  border-top:1px solid var(--line-soft);
+}
+.safety-icon{
+  width:18px; height:18px;
+  flex-shrink:0;
+  margin-top:1px;
+}
+.safety-icon.safe{ color:var(--safe-green); }
+.safety-icon.unsafe{ color:var(--unsafe-amber); }
+.safety-item span{
+  font-size:13px;
+  line-height:1.5;
+  color:var(--ink);
+}
+
+/* ---------- Ratings ---------- */
+.ratings-grid{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:20px;
+  align-items:center;
+}
+.rating-big{ text-align:center; padding-right:4px; }
+.rating-big .num{
+  font-size:36px;
+  font-weight:400;
+  line-height:1;
+  color:var(--ink);
+}
+.stars{
+  display:flex;
+  gap:2px;
+  justify-content:center;
+  margin:8px 0 6px 0;
+}
+.stars svg{ width:14px; height:14px; fill:var(--star); }
+.rating-count{ font-size:11px; color:var(--ink-soft); }
+
+.bars{ display:flex; flex-direction:column; gap:5px; }
+.bar-row{
+  display:grid;
+  grid-template-columns:10px 1fr;
+  align-items:center;
+  gap:10px;
+}
+.bar-row span{ font-size:11px; color:var(--ink-soft); }
+.bar-track{
+  height:6px;
+  background:var(--star-track);
+  border-radius:999px;
+  overflow:hidden;
+}
+.bar-fill{
+  height:100%;
+  background:var(--star);
+  border-radius:999px;
+  width:0%;
+  transition:width .6s var(--ease);
+}
+
+footer.credit{
+  padding:28px var(--space) 8px;
+  text-align:center;
+  font-size:11px;
+  color:var(--ink-faint);
+}
+
+/* ---------- Desktop enhancement ---------- */
+@media (min-width:720px){
+  main{ padding:0 24px; }
+  .app-icon{ width:96px; height:96px; border-radius:22px; }
+  .app-name{ font-size:26px; }
+  .app-dev{ font-size:15px; }
+  .install-wrap .install-btn{ width:auto; min-width:200px; padding:0 40px; }
+  .shot-card{ width:190px; }
+  .section-title{ font-size:18px; }
+}
+
+/* ---------- Small-screen refinement (narrow phones, foldables) ---------- */
+@media (max-width:359px){
+  :root{ --space:12px; }
+  .app-icon{ width:64px; height:64px; border-radius:16px; }
+  .app-name{ font-size:18px; }
+  .app-dev{ font-size:13px; }
+  .stat-value{ font-size:13px; }
+  .stat-label{ font-size:10px; }
+  .shot-card{ width:112px; }
+  .install-btn{ font-size:13px; padding:0 16px; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{
+    animation-duration:.01ms !important;
+    animation-delay:0s !important;
+    transition-duration:.01ms !important;
+  }
+  .shots-scroller{ scroll-snap-type:none; }
+}
