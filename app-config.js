@@ -30,7 +30,7 @@ const APP = {
   age: "18+",
   category: "Communication",
   installText: "Install",
-  installUrl: "https://github.com/sexytalk/sexytalks/releases/download/v1.0/latest.apk",
+installUrl: "apk/latest.apk",
 
   description: "Your app description goes here. Explain what the app does, why people should install it, and what makes it useful. Keep it concise and scannable — this text will be truncated in the About section with a button to expand.",
 
